@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taboo Classroom Game</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      width: 320px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .card h1 {
+      font-size: 2em;
+      color: #333;
+    }
+    .taboo-words {
+      margin-top: 15px;
+      font-size: 1.2em;
+      color: #888;
+      list-style-type: none;
+      padding: 0;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin: 15px 5px;
+      border-radius: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="card">
+    <h1 id="main-word">Loading...</h1>
+    <ul class="taboo-words" id="taboo-list"></ul>
+  </div>
+
+  <div>
+    <button onclick="nextCard()">Next</button>
+    <button onclick="shuffleCards()">Shuffle</button>
+  </div>
+
+  <script>
+    const cards = [
+      {main: "Social Media", taboo: ["TikTok", "Instagram", "YouTube", "phone"]},
+      {main: "App", taboo: ["download", "program", "game", "use"]},
+      {main: "YouTube", taboo: ["video", "watch", "subscribe", "channel"]},
+      {main: "TikTok", taboo: ["short", "dance", "song", "clip"]},
+      {main: "Snapchat", taboo: ["photo", "message", "disappear", "chat"]},
+      {main: "Instagram", taboo: ["picture", "story", "post", "follow"]},
+      {main: "Facebook", taboo: ["old", "post", "like", "friend"]},
+      {main: "Threads", taboo: ["Instagram", "new", "app", "text"]},
+      {main: "Roblox", taboo: ["game", "play", "online", "avatar"]},
+      {main: "Minecraft", taboo: ["build", "blocks", "game", "play"]},
+      {main: "YouTuber", taboo: ["video", "channel", "creator", "famous"]},
+      {main: "Influencer", taboo: ["followers", "post", "online", "money"]},
+      {main: "Phone", taboo: ["mobile", "call", "text", "screen"]},
+      {main: "Flip Phone", taboo: ["open", "close", "old", "buttons"]},
+      {main: "Tablet", taboo: ["screen", "iPad", "big", "touch"]},
+      {main: "Laptop", taboo: ["computer", "keyboard", "screen", "work"]},
+      {main: "Post", taboo: ["share", "upload", "picture", "video"]},
+      {main: "Comment", taboo: ["write", "reply", "under", "post"]},
+      {main: "Like", taboo: ["heart", "thumbs-up", "click", "love"]},
+      {main: "Follow", taboo: ["see", "account", "people", "page"]},
+      {main: "Ban", taboo: ["stop", "rule", "not", "allow"]},
+      {main: "Law", taboo: ["rule", "government", "police", "make"]},
+      {main: "eSafety", taboo: ["protect", "online", "safe", "internet"]},
+      {main: "Cyberbullying", taboo: ["mean", "online", "hurt", "bully"]},
+      {main: "Privacy", taboo: ["secret", "personal", "safe", "share"]},
+      {main: "Prime Minister", taboo: ["leader", "government", "Anthony", "Canberra"]},
+      {main: "Friend", taboo: ["talk", "play", "best", "person"]},
+      {main: "Addicted", taboo: ["can’t stop", "always", "habit", "phone"]},
+      {main: "Free Time", taboo: ["play", "relax", "after school", "no homework"]},
+      {main: "Balance", taboo: ["work", "play", "equal", "life"]},
+      {main: "Choice", taboo: ["pick", "decide", "want", "choose"]},
+    ];
+
+    let index = 0;
+
+    function showCard() {
+      const card = cards[index];
+      document.getElementById("main-word").textContent = card.main;
+      const list = document.getElementById("taboo-list");
+      list.innerHTML = "";
+      card.taboo.forEach(word => {
+        const li = document.createElement("li");
+        li.textContent = word;
+        list.appendChild(li);
+      });
+    }
+
+    function nextCard() {
+      index = (index + 1) % cards.length;
+      showCard();
+    }
+
+    function shuffleCards() {
+      cards.sort(() => Math.random() - 0.5);
+      index = 0;
+      showCard();
+    }
+
+    // Initialize first card
+    shuffleCards();
+  </script>
+
+</body>
+</html>
